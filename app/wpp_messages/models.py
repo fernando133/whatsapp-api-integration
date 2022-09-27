@@ -18,13 +18,14 @@ class WhatsappMessage(models.Model):
     to = models.CharField("Recipient(s) Number", max_length=1500)
     type = models.CharField("Message Type", max_length=5, default="text")
     message_body = models.TextField("Message Body", max_length=1000)
-    date_to_send = models.DateTimeField("Date to Send")
+    send_now = models.BooleanField("Send Now?", default=True)
+    date_to_send = models.DateTimeField("Date to Send", null=True)
     was_sent = models.BooleanField("Was Sent?", default=False)
     is_canceled = models.BooleanField("Is Canceled?", default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return self.id
+        return str(self.id)
 
     class Meta:
         verbose_name = "Message"
