@@ -32,8 +32,6 @@ X_FRAME_OPTIONS = "ALLOW-FROM http://0.0.0.0:8000"
 
 INSTALLED_APPS = [
     "django_filters",
-    "colorfield",
-    "admin_interface",
     "rest_framework",
     "django.contrib.admin",
     "django.contrib.auth",
