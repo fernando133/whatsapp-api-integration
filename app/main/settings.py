@@ -43,11 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "corsheaders",
     "rest_auth.registration",
-    "allauth",
-    "allauth.account",
-    "allauth.socialaccount",
-    "allauth.socialaccount.providers.facebook",
-    "allauth.socialaccount.providers.google",
+    "wpp_messages"
 ]
 
 MIDDLEWARE = [
