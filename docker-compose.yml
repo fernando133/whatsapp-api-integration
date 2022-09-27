@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  api:
+    build:
+         context: ./app
+         dockerfile: Dockerfile
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./app/:/opt/app/
+      - ./static:/opt/app/static/
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    env_file:
+      - ./env/django.env
+      - ./env/database.env
+  db:
+    image: postgres:9.5.20-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - TZ=America/Sao_Paulo
+    env_file:
+      - ./env/database.env
+volumes:
+  postgres_data:

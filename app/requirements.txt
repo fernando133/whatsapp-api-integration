@@ -1,0 +1,12 @@
+Django==3.2.6
+psycopg2
+djangorestframework
+Pillow
+pre-commit
+django-filter
+djangorestframework-simplejwt
+django-admin-interface
+django-cors-headers
+django-model-utils
+django-allauth
+django-rest-auth
