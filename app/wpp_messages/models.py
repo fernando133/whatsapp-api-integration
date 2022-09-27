@@ -15,7 +15,7 @@ class ConsumerSystem(models.Model):
 class WhatsappMessage(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     system = models.ForeignKey(ConsumerSystem, on_delete=models.CASCADE)
-    to = models.CharField("Recipient Number", max_length=15)
+    to = models.CharField("Recipient(s) Number", max_length=1500)
     type = models.CharField("Message Type", max_length=5, default="text")
     message_body = models.CharField("Message Body", max_length=1000)
     date_to_send = models.DateTimeField("Date to Send", auto_now_add=True)
