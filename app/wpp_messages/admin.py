@@ -10,6 +10,4 @@ class ConsumerSystemAdmin(admin.ModelAdmin):
 
 @admin.register(WhatsappMessage)    
 class WhatsappMessage(admin.ModelAdmin):
-    list_display = ["id", "system", "date_to_send", "was_sent"]
-    
-
+    list_display = ["id", "consumer_system", "date_to_send", "was_sent"]

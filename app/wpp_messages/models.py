@@ -6,7 +6,7 @@ class ConsumerSystem(models.Model):
     reference = models.CharField("Consumer Reference", max_length=50)
     
     def __str__(self):
-            return self.reference
+            return str(self.id)
 
     class Meta:
         verbose_name = "Consumer System"
@@ -14,12 +14,13 @@ class ConsumerSystem(models.Model):
 
 class WhatsappMessage(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    system = models.ForeignKey(ConsumerSystem, on_delete=models.CASCADE)
+    consumer_system = models.ForeignKey(ConsumerSystem, on_delete=models.CASCADE)
     to = models.CharField("Recipient(s) Number", max_length=1500)
     type = models.CharField("Message Type", max_length=5, default="text")
-    message_body = models.CharField("Message Body", max_length=1000)
+    message_body = models.TextField("Message Body", max_length=1000)
     date_to_send = models.DateTimeField("Date to Send")
     was_sent = models.BooleanField("Was Sent?", default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
         return self.id

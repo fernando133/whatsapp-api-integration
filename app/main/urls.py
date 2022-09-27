@@ -6,6 +6,8 @@ from django.conf import settings
 
 from rest_framework_simplejwt import views as jwt_views
 
+from wpp_messages.api.viewsets import WhatsappMessageViewset
+
 router = routers.DefaultRouter()
 
 admin.site.site_header = "WTM Brazil"
@@ -13,6 +15,7 @@ admin.site.index_title = "Administração WTM"
 admin.site.site_title = "Painel"
 
 router = routers.DefaultRouter()
+router.register("messages", WhatsappMessageViewset, basename="WhatsappMessages")
 
 urlpatterns = [
     path("", include(router.urls)),
