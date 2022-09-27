@@ -12,5 +12,6 @@ from wpp_messages.api.serializers import (
 class WhatsappMessageViewset(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ["consumer_system"]
+    pagination_class = None
     queryset = WhatsappMessage.objects.all().order_by("-created_at")
     serializer_class = WhatsappMessageSerializer

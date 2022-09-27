@@ -20,6 +20,7 @@ class WhatsappMessage(models.Model):
     message_body = models.TextField("Message Body", max_length=1000)
     date_to_send = models.DateTimeField("Date to Send")
     was_sent = models.BooleanField("Was Sent?", default=False)
+    is_canceled = models.BooleanField("Is Canceled?", default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
