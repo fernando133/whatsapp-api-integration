@@ -27,26 +27,25 @@ class WhatsappMessageViewset(viewsets.ModelViewSet):
             return WhatsappMessageListSerializer
         return super().get_serializer_class()
     
-    def get_perform_create(self, serializer):
-        self.perform_create(serializer)
-        self.get_success_headers(serializer.data)
-        return Response(serializer.data)
+    def check_dispatch(self, response, msg):
+        if response.status_code == 200:
+            msg.set_sent()
+            serializer = WhatsappMessageSerializer(msg, many=False)
+            return Response(serializer.data)
+        return Response(json.loads(response.text))
     
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         msg = WhatsappMessage(**serializer.validated_data)
-
         response_graph_api = None
         if msg.send_now:
             response_graph_api = msg.send_message()
-        
-            if response_graph_api.status_code == 200:
-                return self.get_perform_create(serializer)
-            
-            return Response(json.loads(response_graph_api.text))
+            return self.check_dispatch(response_graph_api, msg)
 
-        return self.get_perform_create(serializer)
+        self.perform_create(serializer)
+        self.get_success_headers(serializer.data)
+        return Response(serializer.data)
         
 
     @action(detail=True, methods=["put", "get"])

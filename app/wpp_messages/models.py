@@ -33,9 +33,13 @@ class WhatsappMessage(models.Model):
     class Meta:
         verbose_name = "Message"
         verbose_name_plural = "Messages"
+        
+    def set_sent(self):
+        self.was_sent = True
+        self.save()
     
     def send_message(self):
-        url = "https://graph.facebook.com/v14.0/109914955215526/messages"
+        url = "https://graph.facebook.com/v14.0/"+os.environ['NUMBER_ID']+"/messages"
 
         payload = json.dumps({
             "messaging_product": "whatsapp",
