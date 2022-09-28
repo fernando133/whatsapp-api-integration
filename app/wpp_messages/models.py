@@ -1,5 +1,8 @@
 from django.db import models
 import uuid
+import requests
+import json
+import os
 
 class ConsumerSystem(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -30,3 +33,25 @@ class WhatsappMessage(models.Model):
     class Meta:
         verbose_name = "Message"
         verbose_name_plural = "Messages"
+    
+    def send_message(self):
+        url = "https://graph.facebook.com/v14.0/109914955215526/messages"
+
+        payload = json.dumps({
+            "messaging_product": "whatsapp",
+            "to": self.to,
+            "type": self.type,
+            "text": {
+                "preview_url": False,
+                "body": self.message_body
+            }
+        })
+        headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + os.environ['BEARER_TOKEN']
+        }
+
+        response = requests.request("POST", url, headers=headers, data=payload)
+
+        return response
+
