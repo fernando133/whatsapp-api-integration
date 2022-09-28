@@ -38,6 +38,10 @@ class WhatsappMessage(models.Model):
         self.was_sent = True
         self.save()
     
+    def set_canceled(self):
+        self.is_canceled = True
+        self.save()
+    
     def send_message(self):
         url = "https://graph.facebook.com/v14.0/"+os.environ['NUMBER_ID']+"/messages"
 

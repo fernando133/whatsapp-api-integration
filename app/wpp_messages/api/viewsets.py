@@ -55,10 +55,8 @@ class WhatsappMessageViewset(viewsets.ModelViewSet):
             return Response({"Detail":"Message already canceled."}, status=400)
         
         if not message_obj.was_sent:
-            message_obj.is_canceled = True
-            message_obj.save()
+            message_obj.set_canceled()
             serializer = self.get_serializer(message_obj)
             return Response(serializer.data)
 
         return Response({"Detail":"Can't cancel, this message already sent."}, status=400)
-
