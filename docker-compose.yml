@@ -17,6 +17,7 @@ services:
       - ./env/django.env
       - ./env/database.env
       - ./env/whatsapp.env
+
   db:
     image: postgres:9.5.20-alpine
     volumes:
@@ -25,5 +26,6 @@ services:
       - TZ=America/Sao_Paulo
     env_file:
       - ./env/database.env
+  
 volumes:
   postgres_data:

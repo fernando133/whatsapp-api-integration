@@ -1,8 +1,10 @@
 from django.db import models
+from datetime import date
 import uuid
 import requests
 import json
 import os
+
 
 class ConsumerSystem(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -22,7 +24,7 @@ class WhatsappMessage(models.Model):
     type = models.CharField("Message Type", max_length=5, default="text")
     message_body = models.TextField("Message Body", max_length=1000)
     send_now = models.BooleanField("Send Now?", default=True)
-    date_to_send = models.DateTimeField("Date to Send", null=True)
+    date_to_send = models.DateField("Date to Send", null=True)
     was_sent = models.BooleanField("Was Sent?", default=False)
     is_canceled = models.BooleanField("Is Canceled?", default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -62,4 +64,11 @@ class WhatsappMessage(models.Model):
         response = requests.request("POST", url, headers=headers, data=payload)
 
         return response
-
+    
+    def send_scheduled_messages():
+        print("run")
+        day_messages = WhatsappMessage.objects.filter(date_to_send=date.today())
+        for message in day_messages:
+            response = message.send()
+            print(response, message)
+    
