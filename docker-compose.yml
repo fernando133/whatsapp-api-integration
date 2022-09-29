@@ -1,13 +1,16 @@
 version: '3.7'
 
 services:
-  api:
+  app:
     build:
-         context: ./app
-         dockerfile: Dockerfile
-    command: python manage.py runserver 0.0.0.0:8000
+         context: .
+         dockerfile: ./app/Dockerfile
+    command: >
+      sh -c "python3 manage.py migrate &&
+              python3 manage.py wait_for_db &&
+              python3 manage.py runserver 0.0.0.0:8000"
     volumes:
-      - ./app/:/opt/app/
+      - ./app/:/app
       - ./static:/opt/app/static/
     ports:
       - 8000:8000
@@ -27,5 +30,25 @@ services:
     env_file:
       - ./env/database.env
   
+  redis:
+    image: redis:alpine
+  
+  celery:
+    restart: always
+    build:
+      context: .
+      dockerfile: ./app/Dockerfile
+    command: >
+      sh -c "celery -A main worker -l info -B"
+    volumes:
+      - ./app:/app
+    env_file:
+      - ./env/django.env
+      - ./env/whatsapp.env
+    depends_on:
+      - db
+      - redis
+      - app
+
 volumes:
   postgres_data:

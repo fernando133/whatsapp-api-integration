@@ -1,5 +1,4 @@
 from django.db import models
-from datetime import date
 import uuid
 import requests
 import json
@@ -64,11 +63,5 @@ class WhatsappMessage(models.Model):
         response = requests.request("POST", url, headers=headers, data=payload)
 
         return response
-    
-    def send_scheduled_messages():
-        print("run")
-        day_messages = WhatsappMessage.objects.filter(date_to_send=date.today())
-        for message in day_messages:
-            response = message.send()
-            print(response, message)
+
     

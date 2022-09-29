@@ -10,3 +10,5 @@ django-cors-headers
 django-model-utils
 django-allauth
 django-rest-auth
+celery==4.4.1
+redis==3.4.1
