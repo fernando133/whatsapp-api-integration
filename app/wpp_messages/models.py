@@ -26,6 +26,7 @@ class WhatsappMessage(models.Model):
     date_to_send = models.DateField("Date to Send", null=True)
     was_sent = models.BooleanField("Was Sent?", default=False)
     is_canceled = models.BooleanField("Is Canceled?", default=False)
+    api_return = models.TextField("Graph Api Return", max_length=500, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
@@ -42,6 +43,17 @@ class WhatsappMessage(models.Model):
     def set_canceled(self):
         self.is_canceled = True
         self.save()
+        
+    def able_to_send(self):
+        if self.was_sent or self.is_canceled:
+            return False
+        return True
+    
+    def set_return(self, response_text):
+        print("Return: ", response_text)
+        self.api_return = response_text
+        self.save()
+        
     
     def send_message(self):
         url = "https://graph.facebook.com/v14.0/"+os.environ['NUMBER_ID']+"/messages"

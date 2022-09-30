@@ -7,7 +7,7 @@ from wpp_messages.models import (
 class WhatsappMessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = WhatsappMessage
-        exclude = ["was_sent", "type", "is_canceled"]
+        exclude = ["was_sent", "type", "is_canceled", "api_return"]
 
 class WhatsappMessageListSerializer(serializers.ModelSerializer):
     class Meta:

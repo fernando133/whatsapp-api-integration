@@ -15,6 +15,6 @@ def debug_task(self):
 app.conf.beat_schedule = {
     'send-scheduled-messages': {
         'task': 'send_scheduled_messages',
-        'schedule': 30.0
+        'schedule': 60.0
     }
 }
