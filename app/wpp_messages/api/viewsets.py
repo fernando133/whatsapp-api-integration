@@ -30,6 +30,7 @@ class WhatsappMessageViewset(viewsets.ModelViewSet):
     def check_dispatch(self, response, msg):
         if response.status_code == 200:
             msg.set_sent()
+            msg.set_return(response.text)
             serializer = WhatsappMessageSerializer(msg, many=False)
             return Response(serializer.data)
         return Response(json.loads(response.text))
@@ -60,3 +61,8 @@ class WhatsappMessageViewset(viewsets.ModelViewSet):
             return Response(serializer.data)
 
         return Response({"Detail":"Can't cancel, this message already sent."}, status=400)
+
+    @action(detail=False)
+    def webhook(self, request, pk=None):
+        print("Request:", request.data)
+        return Response({"hub.challenge":"a123456"}, status=200)

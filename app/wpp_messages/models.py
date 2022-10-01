@@ -50,8 +50,7 @@ class WhatsappMessage(models.Model):
         return True
     
     def set_return(self, response_text):
-        print("Return: ", response_text)
-        self.api_return = response_text
+        self.api_return = json.loads(response_text)
         self.save()
         
     
