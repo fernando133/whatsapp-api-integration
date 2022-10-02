@@ -62,7 +62,8 @@ class WhatsappMessageViewset(viewsets.ModelViewSet):
 
         return Response({"Detail":"Can't cancel, this message already sent."}, status=400)
 
-    @action(detail=False)
+    @action(detail=False, methods=["get", "post"])
     def webhook(self, request, pk=None):
+        print(request.data)
         hub_challenge = request.GET.get("hub.challenge")
         return Response(int(hub_challenge), status=200)
