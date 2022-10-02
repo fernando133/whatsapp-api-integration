@@ -65,5 +65,8 @@ class WhatsappMessageViewset(viewsets.ModelViewSet):
     @action(detail=False, methods=["get", "post"])
     def webhook(self, request, pk=None):
         print(request.data)
-        hub_challenge = request.GET.get("hub.challenge")
-        return Response(int(hub_challenge), status=200)
+        if request.GET:
+            hub_challenge = request.GET.get("hub.challenge")
+            return Response(int(hub_challenge), status=200)
+
+        return Response("", status=200)
