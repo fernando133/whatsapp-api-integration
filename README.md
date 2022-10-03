@@ -47,7 +47,7 @@ With the docker containers running into port 8000, you can use the ngrok to expo
 More information about ngrok: https://ngrok.com/
 <br>
 And in your developer.facebook.com account configure the webhook to:
-https://<ngrok_address>/webhook/
+https://<ngrok_address>/messages/webhook/
 
 Obs.: Don't forget the end slash.
 
