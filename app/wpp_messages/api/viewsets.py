@@ -68,5 +68,6 @@ class WhatsappMessageViewset(viewsets.ModelViewSet):
         if request.GET:
             hub_challenge = request.GET.get("hub.challenge")
             return Response(int(hub_challenge), status=200)
-
+        
+        #TODO - someting with the webhook response
         return Response("", status=200)
