@@ -1,5 +1,10 @@
 # Introduction
 
+WhatsApp api integration to schedulle and automate the process of message sending with Python.
+
+Technologies: Python, Django, Django Rest Framework, Celery
+WhatsApi Get Start: https://developers.facebook.com/docs/whatsapp/cloud-api/get-started  
+
 ## Prerequisites
 
 Have Docker and Docker Compose installed on the machine or server.
