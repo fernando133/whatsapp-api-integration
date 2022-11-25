@@ -1,4 +1,4 @@
-# Intruction
+# Introduction
 
 ## Prerequisites
 
