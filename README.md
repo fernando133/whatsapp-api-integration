@@ -1,6 +1,6 @@
 # Introduction
 
-WhatsApp api integration to schedulle and automate the process of message sending with Python.
+WhatsApp api integration to schedulle and automate the process of message sending with Python with support for many client's.
 
 - Technologies: Python, Django, Django Rest Framework, Celery
 - WhatsApi Get Start: https://developers.facebook.com/docs/whatsapp/cloud-api/get-started  
